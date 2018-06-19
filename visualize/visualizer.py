@@ -3,11 +3,11 @@ import os
 import matplotlib.pyplot as plt
 import collections
 
-RESULT_DIRECTORY='__results__/visualization'
-def wordcloud(filename, wordfreq):
+# RESULT_DIRECTORY='__results__/visualization'
+def wordcloud(filename, wordfreq,result_vidualization_dir):
     taglist = pytagcloud.make_tags(wordfreq.items(), maxsize=80)
     # print(taglist)
-    save_filename = '%s/wordcloud_%s.jpg' % (RESULT_DIRECTORY,filename)
+    save_filename = '%s/wordcloud_%s.jpg' % (result_vidualization_dir,filename)
 
     pytagcloud.create_tag_image(taglist,save_filename,
                                 size=(900,600),
@@ -15,12 +15,12 @@ def wordcloud(filename, wordfreq):
                                 rectangular=False,
                                 background=(0, 0, 0) )
 
-if os.path.exists(RESULT_DIRECTORY) is False:
-    print('create directory')
-    os.makedirs(RESULT_DIRECTORY)
+# if os.path.exists(RESULT_DIRECTORY) is False:
+#     print('create directory')
+#     os.makedirs(RESULT_DIRECTORY)
 
 def graph_bar(title=None, xlabel=None, ylabel=None, showgrid=False,
-              values=None, ticks=None, filename=None, showgraph=True):
+              values=None, ticks=None, filename=None, showgraph=True,result_vidualization_dir=''):
 
     fig, subplots= plt.subplots(1,1)
     subplots.bar(range(len(values)),values, align='center')#x축, y축 잡아춤
@@ -47,7 +47,7 @@ def graph_bar(title=None, xlabel=None, ylabel=None, showgrid=False,
 
     #데이터 저장
     if filename is not None and isinstance(filename, str):#filename이 String 형태여야 한다.
-        save_filename = '%s/bar_%s.png' % (RESULT_DIRECTORY, filename)
+        save_filename = '%s/bar_%s.png' % (result_vidualization_dir, filename)
         plt.savefig(save_filename,
                     dpi=400,#해상도
                     bbox_inches='tight'#여백이 없다.
